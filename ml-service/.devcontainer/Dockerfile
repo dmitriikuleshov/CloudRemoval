@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.8.1-runtime-ubuntu24.04
+FROM pytorch/pytorch:2.5.0-cuda12.4-cudnn9-runtime
 
 ENV TZ="Europe/Moscow"
 
@@ -12,7 +12,7 @@ RUN python3 -m venv /venv
 
 # To prevent downloading dependencies again upon changing
 # files, the dependencies file is copied separately
-COPY requirements.txt .
+COPY ../requirements.txt .
 
 RUN /venv/bin/pip install --no-cache-dir -r requirements.txt
 

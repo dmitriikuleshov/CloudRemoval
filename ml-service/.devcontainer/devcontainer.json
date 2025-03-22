@@ -1,0 +1,21 @@
+{
+    "name": "Cloud devcontainer",
+    "dockerFile": "Dockerfile",
+    "context": "..",
+    "appPort": [],
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "forwardPorts": [3000],
+    "runArgs": [
+    "--gpus",
+    "all"
+    ],
+    "runtimes": {
+        "nvidia": {
+            "path": "nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    },
+    "default-runtime": "nvidia"
+}

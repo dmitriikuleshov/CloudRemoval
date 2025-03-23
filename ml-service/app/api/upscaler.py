@@ -5,7 +5,7 @@ from typing import List
 from fastapi import APIRouter, File, UploadFile
 from fastapi.responses import StreamingResponse
 
-from app.models.upscaler import upscale_image, upscale_batch
+from app.models.upscaler.functions import upscale_image
 
 
 router = APIRouter(

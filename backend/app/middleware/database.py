@@ -1,7 +1,9 @@
 from sqlmodel import SQLModel, Session, create_engine
 
+from app import settings
 
-engine = create_engine("sqlite:///cloud_removal.db")
+
+engine = create_engine(settings.Database.url)
 SQLModel.metadata.create_all(engine)
 
 

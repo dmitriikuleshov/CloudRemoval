@@ -1,0 +1,1389 @@
+/* Дополнительные стили */
+body {
+    padding-top: 56px;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+
+header {
+   position: relative;
+   height: calc(100vh - 56px);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: white;
+   text-align: center;
+   overflow: hidden;
+}
+
+a.disabled {
+    color: #90b4ce;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+a.active {
+    color: #3da9fc;
+    font-weight: bold;
+}
+
+#bg-video {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   z-index: -1;
+   filter: brightness(0.7);
+}
+
+section {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding-top: 60px;
+    padding-bottom: 80px;
+    display: flex;
+    font-size: 1.1rem;
+    text-align: left;
+    justify-content: center;
+}
+
+section > * {
+    margin-top: 56px;
+}
+
+
+section:nth-child(2n) {
+   background-color: #fffffe;
+   color: rgb(9, 64, 103);
+}
+
+
+section:nth-child(2n-1) {
+   color: #fffffe;
+   background-color: rgb(16, 99, 159);
+}
+
+section:nth-child(2n-1) a {
+    text-decoration: underline;
+    color: #fffffe;
+ }
+
+ 
+ 
+ section:nth-child(2n) a {
+     text-decoration: underline;
+     color: rgb(9, 64, 103);
+    }
+section a:hover {
+        text-decoration: underline;
+        animation: hover 0.6s ease-in-out forwards;
+     }
+
+@keyframes hover {
+    0% {
+        color: inherit;
+    }
+    100% {
+        color:#ef4565;
+    }
+}
+
+.bottom-center {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.scroll-down {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #3da9fc;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.scroll-down:hover {
+    color: #ef4565;
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+    transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #094067;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-right: 0;
+}
+
+.logo-image {
+    height: 40px;
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.brand-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #094067;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.navbar-nav .nav-item {
+    margin: 0 12px;
+}
+
+.navbar-nav .nav-link {
+    color: #5f6c7b;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover, 
+.navbar-nav .nav-link.active {
+    color: #3da9fc;
+    background-color: rgba(61, 169, 252, 0.08);
+    transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    background-color: #3da9fc;
+    border-radius: 10px;
+}
+
+.login-btn-wrapper {
+    margin-left: 20px;
+}
+
+.login-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #3da9fc, #6246ea);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(61, 169, 252, 0.3);
+}
+
+.login-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(61, 169, 252, 0.4);
+    color: white;
+}
+
+.login-btn:active {
+    transform: translateY(1px);
+}
+
+/* Стили для выпадающего меню */
+.dropdown-menu {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(9, 64, 103, 0.15);
+    padding: 12px;
+    margin-top: 15px;
+    backdrop-filter: blur(10px);
+    transform-origin: top center;
+    animation: dropdown-animation 0.3s ease forwards;
+}
+
+@keyframes dropdown-animation {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.dropdown-item {
+    color: #094067;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(61, 169, 252, 0.1);
+    color: #3da9fc;
+    transform: translateX(5px);
+}
+
+.dropdown-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #3da9fc;
+    transition: all 0.3s ease;
+    transform: translateY(-50%);
+}
+
+.dropdown-item:hover::before {
+    width: 8px;
+}
+
+/* Стили для гамбургер-меню */
+.navbar-toggler {
+    border: none;
+    background: rgba(61, 169, 252, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.navbar-toggler:hover {
+    background: rgba(61, 169, 252, 0.2);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(9, 64, 103, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: rgba(255, 255, 255, 0.98);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-top: 15px;
+    }
+    
+    .navbar-nav .nav-link.active::after {
+        display: none;
+    }
+    
+    .login-btn-wrapper {
+        margin: 15px 0 0 0;
+    }
+    
+    .login-btn {
+        display: block;
+        text-align: center;
+    }
+    
+    .dropdown-menu {
+        box-shadow: none;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 0;
+        margin-left: 15px;
+    }
+}
+
+/* JavaScript для изменения навбара при прокрутке */
+
+@keyframes moveClouds {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+#bg-video_reg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.7); /* Затемнение видео */
+}
+
+footer {
+    background-color: rgba(48,49,54, 1);
+    color: #fffffe;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.footer-text {
+    margin-bottom: 2rem;
+}
+
+footer div {
+    margin-bottom: 15px;
+}
+
+footer svg {
+    margin-right: 10px;
+}
+
+footer br {
+    margin-bottom: 10px;
+}
+
+footer h3 {
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+footer div a {
+    color: #fffffe;
+    text-decoration: none;
+}
+
+.footer-contacts {
+    display:  flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.footer-links > li{
+    margin-bottom: 5px;
+}
+.footer-links > h3{
+    margin-bottom: 10px;
+}
+
+footer a:hover {
+    animation: hover 0.6s ease-in-out forwards;
+    color: rgb(239, 69, 101)
+}
+
+
+.contact-us {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0px;
+    position: relative;
+}
+
+
+footer .email-input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1.5px solid rgb(37,37,37);
+    border-radius: 0.25rem;
+    color: #fffffe;
+    background-color: rgb(39,39,37);
+}
+
+footer .email-input:focus {
+    outline: none;
+    animation: focus-input 0.3s ease-in-out forwards;
+    border-color: rgb(239, 69, 101);
+    box-shadow: 0 0 0 0.2rem rgba(239, 69, 101, 0.25);
+}
+
+footer .message-input {
+    resize: none;
+    width: 100%;
+    min-height: 6em;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1.5px solid rgb(37,37,37);
+    border-radius: 0.25rem;
+    color: #fffffe;
+    background-color: rgb(39,39,37);
+}
+
+footer .message-input:focus {
+    outline: none;
+    animation: focus-input 0.3s ease-in-out forwards;
+    border-color: rgb(239, 69, 101);
+    box-shadow: 0 0 0 0.2rem rgba(239, 69, 101, 0.25);
+}
+
+@keyframes focus-input {
+    0% {
+        border-color: rgb(37,37,37);
+    }
+    100% {
+        border-color: rgb(239, 69, 101);
+    }
+}
+
+footer .submit-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    color: #fffffe;
+    background-color: rgb(239, 69, 101);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 0 0 auto;
+}
+
+footer .submit-button:hover {
+
+    z-index: -2;
+    filter: brightness(0.7);
+}
+
+footer {
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    position: relative;
+}
+
+footer .container {
+    flex: 1;
+    min-width: 250px;
+    padding: 1rem;
+}
+
+.footer-contacts {
+    gap: 15px;
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-contacts {
+        align-items: center;
+    }
+    
+    .footer-links {
+        padding-left: 0;
+        list-style: none;
+    }
+    
+    .contact-us {
+        max-width: 100%;
+    }
+    
+    .submit-button {
+        width: 100%;
+        margin-top: 1rem;
+    }
+    
+    footer .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    footer h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    footer .container {
+        min-width: 100%;
+    }
+    
+    footer .email-input,
+    footer .message-input {
+        font-size: 0.9rem;
+    }
+    
+    .submit-button {
+        font-size: 0.9rem;
+    }
+}
+
+/* Стили для секции обработки изображений */
+.image-processing-container {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.upload-container, .result-container {
+    flex: 0 1 35%;
+    height: 400px;
+}
+
+.dropzone, .result-box {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #aaaaaa;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropzone:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.upload-icon {
+    margin-bottom: 15px;
+    color: #aaaaaa;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-input-label {
+    background-color: rgba(61, 169, 252, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-input-label:hover {
+    background-color: rgba(61, 169, 252, 1);
+}
+
+.result-placeholder {
+    color: #aaaaaa;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.generate-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.generate-btn {
+    background-color: #ef4565;
+    color: white;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 250px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.generate-btn:hover {
+    background-color: #d03d59;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 768px) {
+    .image-processing-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .upload-container, .result-container {
+        width: 80%;
+        height: 250px;
+    }
+}
+
+/* Новое облачное оформление для секции обработки изображений */
+#image_processing {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #90e0ef, #0077b6);
+    color: #fffffe;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+#image_processing .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#image_processing h2 {
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+#image_processing h2::after {
+    content: "";
+    position: absolute;
+    left: 25%;
+    bottom: -15px;
+    width: 50%;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Создаем слой с облаками в качестве фона */
+#image_processing::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" viewBox="0 0 100 60"><path fill="rgba(255,255,255,0.4)" d="M90,42.5c0,9.8-8,17.8-17.8,17.8c-0.8,0-1.6-0.1-2.4-0.2c-2.2,4.9-7.1,8.3-12.8,8.3c-7.4,0-13.4-5.7-14-13c-0.3,0-0.6,0-0.9,0c-6.8,0-12.3-5.5-12.3-12.3c0-4.6,2.6-8.7,6.4-10.7c-0.2-1.2-0.3-2.5-0.3-3.8c0-13.3,10.8-24,24-24c9.7,0,18,5.8,21.7,14c1.2-0.3,2.5-0.4,3.8-0.4c9.8,0,17.8,8,17.8,17.8c0,1.9-0.3,3.8-0.9,5.5C88.9,42.7,90,42.5,90,42.5z"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" viewBox="0 0 100 60"><path fill="rgba(255,255,255,0.3)" d="M40,15c0,5.5-4.5,10-10,10c-0.6,0-1.1-0.1-1.7-0.2c-1.5,3.4-4.9,5.7-8.9,5.7c-5.1,0-9.3-3.9-9.8-9c-0.2,0-0.4,0-0.7,0C4.4,21.5,0,17.1,0,11.5c0-3.2,1.5-6,3.8-7.8C3.7,2.8,3.5,2,3.5,1.2c0-2.3,1.9-4.2,4.2-4.2c1.8,0,3.4,1.2,4,2.8c1.4-0.7,3-1.2,4.7-1.2c5.5,0,10,4.5,10,10c0,0.3,0,0.7-0.1,1C32.1,8.5,36.5,6,38,6c2.2,0,4,1.8,4,4c0,0.9-0.3,1.8-0.8,2.5C45.3,6.7,40,15,40,15z"/></svg>');
+    background-repeat: no-repeat, repeat;
+    background-position: 
+        80% 40%,
+        20% 20%;
+    background-size: 
+        200px 120px,
+        150px 90px;
+    animation: moveClouds 100s linear infinite;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+/* Эффект пушистых облаков */
+@keyframes moveClouds {
+    0% {
+        background-position: -10% 40%, -30% 20%;
+    }
+    100% {
+        background-position: 100% 40%, 100% 20%;
+    }
+}
+
+/* Стилизация контейнеров для лучшего соответствия облачной тематике */
+.dropzone, .result-box {
+    border: 2px dashed rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(3px);
+    transition: all 0.4s ease;
+}
+
+.dropzone:hover, .result-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 25px rgba(0, 0, 0, 0.15),
+        inset 0 0 25px rgba(255, 255, 255, 0.3);
+    border-color: #fff;
+}
+
+/* Эффект "солнечных лучей" для верхней части секции */
+#image_processing::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    opacity: 0.5;
+    z-index: -1;
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.5; }
+}
+
+/* Стилизация заголовка */
+#image_processing h2 {
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+#image_processing h2::after {
+    content: "";
+    position: absolute;
+    left: 25%;
+    bottom: -10px;
+    width: 50%;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Стилизация кнопок */
+.file-input-label {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 30px;
+    padding: 8px 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.file-input-label:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.generate-btn {
+    background-color: #023e8a;
+    color: white;
+    border: 2px solid white;
+    border-radius: 250px;
+    padding: 12px 40px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.generate-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s ease;
+    z-index: -1;
+}
+
+.generate-btn:hover {
+    background-color: #0077b6;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.generate-btn:hover::before {
+    left: 100%;
+}
+
+/* Измененный цвет текста в результирующем блоке */
+.result-placeholder {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Добавим маленькие "капли" для более интересного визуального эффекта */
+@keyframes rainDrop {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    70% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(120px);
+        opacity: 0;
+    }
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    #image_processing::before {
+        background-size: 150px 90px, 100px 60px;
+    }
+    
+    #image_processing h2::after {
+        width: 70%;
+        left: 15%;
+    }
+}
+
+/* Стили для секции описания проекта */
+#description {
+    background-color: #fffffe;
+    color: #094067;
+    z-index: 2;
+    margin-bottom: 20px;
+}
+
+#description h2 {
+    color: #094067;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+}
+
+#description h3 {
+    color: #094067;
+    font-weight: 600;
+}
+
+#description .lead {
+    font-size: 1.2rem;
+    color: #5f6c7b;
+}
+
+/* Стили для карточек особенностей */
+.feature-card {
+    background-color: rgba(61, 169, 252, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    height: 100%;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid #3da9fc;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(9, 64, 103, 0.1);
+}
+
+.feature-icon {
+    color: #3da9fc;
+    margin-bottom: 1rem;
+}
+
+.feature-card h4 {
+    color: #094067;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Стили для изображения до/после */
+.image-comparison {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(9, 64, 103, 0.15);
+}
+
+.before-after-label {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    padding: 0 15px;
+    z-index: 3;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.comparison-image-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.comparison-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.comparison-image.overlay {
+    width: 50%;
+    border-right: 2px solid white;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.image-comparison:hover .comparison-image.overlay {
+    width: 50%;
+}
+
+/* Адаптивность для секции описания */
+@media (max-width: 768px) {
+    .feature-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .comparison-image-container {
+        height: 200px;
+    }
+    
+    #description .row {
+        flex-direction: column-reverse;
+    }
+    
+    #description .col-lg-6:first-child {
+        margin-top: 2rem;
+    }
+}
+
+/* Стили для обработки изображений и кнопок действий */
+.processing-indicator {
+    text-align: center;
+    color: white;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    margin: 0 auto 15px;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.like-btn, .reprocess-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    color: white;
+}
+
+.like-btn:hover {
+    background: #ef4565;
+    transform: scale(1.1);
+}
+
+.reprocess-btn:hover {
+    background: #3da9fc;
+    transform: scale(1.1);
+}
+
+#processed-image {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Улучшенные стили для контейнера результата */
+.result-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Стили для секции Ссылки */
+#links {
+    background: linear-gradient(135deg, #fffffe, #d8eefe);
+    color: #094067;
+    position: relative;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.link-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(9, 64, 103, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.link-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    z-index: -1;
+}
+
+.link-card.research::before {
+    background-color: #ef4565;
+}
+
+.link-card.tools::before {
+    background-color: #3da9fc;
+}
+
+.link-card.learning::before {
+    background-color: #6246ea;
+}
+
+.link-card.partners::before {
+    background-color: #2cb67d;
+}
+
+.link-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(9, 64, 103, 0.15);
+}
+
+.link-icon {
+    color: #094067;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding: 15px;
+    background-color: rgba(61, 169, 252, 0.1);
+    border-radius: 50%;
+}
+
+.link-card h3 {
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #094067;
+}
+
+.link-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 15px;
+}
+
+.link-list li {
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+.link-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.link-card.research .link-list li::before {
+    background-color: #ef4565;
+}
+
+.link-card.tools .link-list li::before {
+    background-color: #3da9fc;
+}
+
+.link-card.learning .link-list li::before {
+    background-color: #6246ea;
+}
+
+.link-card.partners .link-list li::before {
+    background-color: #2cb67d;
+}
+
+.link-list a {
+    color: #094067 !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: inline-block;
+    line-height: 1.5;
+    padding: 2px 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.link-list a:hover {
+    color: #3da9fc !important;
+    padding-left: 5px;
+    text-decoration: underline;
+}
+
+.link-list a, .link-list li, .link-list {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.link-list a {
+    display: inline-block !important;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    background-color: #094067;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    background-color: #3da9fc;
+    box-shadow: 0 10px 20px rgba(9, 64, 103, 0.2);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .social-links {
+        flex-wrap: wrap;
+    }
+}
+
+/* Стили для выпадающего меню */
+.dropdown-menu {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(9, 64, 103, 0.1);
+    padding: 10px;
+    margin-top: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.dropdown-item {
+    color: #094067;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(61, 169, 252, 0.1);
+    color: #3da9fc;
+    transform: translateX(5px);
+}
+
+.dropdown-toggle::after {
+    margin-left: 0.5em;
+    vertical-align: middle;
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    min-width: 220px;
+}
+
+/* Стили для логотипа и заголовка */
+.navbar .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #094067;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-right: 0;
+}
+
+.logo-image {
+    height: 40px;
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.brand-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #094067;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+/* Адаптивность для текста бренда */
+@media (max-width: 1200px) {
+    .brand-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-brand {
+        margin-right: auto;
+        padding-right: 0;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Изменяем расположение текста на мобильных устройствах */
+    .navbar .container {
+        flex-wrap: nowrap; /* Отменяем обертывание элементов */
+    }
+    
+    /* Убираем псевдоэлемент */
+    .navbar-brand::after {
+        content: none;
+    }
+    
+    /* Показываем текст справа от логотипа */
+    .brand-title {
+        display: block !important; /* Переопределяем d-none */
+        position: static; /* Убираем абсолютное позиционирование */
+        transform: none; /* Отменяем трансформацию */
+        font-size: 0.6rem; /* Уменьшаем размер текста */
+        margin-left: 5px; /* Добавляем отступ слева от логотипа */
+        text-align: left;
+        white-space: nowrap;
+        line-height: 1;
+    }
+    
+    /* Уменьшаем логотип на мобильных устройствах */
+    .logo-image {
+        height: 30px;
+    }
+    
+    /* Название приложения скрываем на малых экранах */
+    .navbar-brand span {
+        display: none;
+    }
+}
+
+/* Для самых малых экранов */
+@media (max-width: 380px) {
+    .brand-title {
+        font-size: 0.5rem; /* Ещё меньше размер текста */
+    }
+}
+
+.footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: flex-start;
+    margin-left: -5px;
+    padding-left: 0;
+}
+
+.footer-social .social-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    margin-right: 5px;
+}
+
+.footer-social .social-link svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 22px;
+    height: 22px;
+}
+
+.footer-social .social-link:hover {
+    background-color: #3da9fc;
+    transform: translateY(-5px);
+}

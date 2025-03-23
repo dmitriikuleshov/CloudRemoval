@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('./static/videos/1479.gif') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 1.5rem;
+        }
+        .nav-links a {
+            color: gray;
+            text-decoration: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .nav-links a.active {
+            color: #007bff;
+            font-weight: bold;
+        }
+        .form-label {
+            display: block;
+            text-align: left;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 25px;
+            width: 100%;
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            width: 100%;
+            border-radius: 25px;
+        }
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+        .toggle-switch label {
+            font-size: 0.9rem;
+        }
+        .toggle-switch input {
+            appearance: none;
+            width: 50px;
+            height: 25px;
+            background: gray;
+            border-radius: 12.5px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .toggle-switch input:checked {
+            background: #007bff;
+        }
+        .toggle-switch input::after {
+            content: 'NO';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 0.8rem;
+        }
+        .toggle-switch input:checked::after {
+            content: 'YES';
+            left: auto;
+            right: 5px;
+        }
+        .forgot-password {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="nav-links">
+            <a id="signInTab" class="active" onclick="showForm('signIn')">SIGN IN</a>
+            <a id="signUpTab" onclick="showForm('signUp')">SIGN UP</a>
+        </div>
+        <form id="signInForm">
+            <div class="mb-3">
+                <label for="username" class="form-label">USERNAME</label>
+                <input type="text" id="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">PASSWORD</label>
+                <input type="password" id="password" class="form-control" required>
+            </div>
+            <div class="toggle-switch">
+                <label>KEEP ME SIGNED IN</label>
+                <input type="checkbox">
+            </div>
+            <button type="submit" class="btn btn-primary">SIGN IN</button>
+        </form>
+        <form id="signUpForm" class="hidden">
+            <div class="mb-3">
+                <label for="new-username" class="form-label">USERNAME</label>
+                <input type="text" id="new-username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">EMAIL</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="new-password" class="form-label">PASSWORD</label>
+                <input type="password" id="new-password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">SIGN UP</button>
+        </form>
+        <p class="forgot-password">
+            <a href="#">Forgot your password?</a>
+        </p>
+    </div>
+    <script>
+        function showForm(form) {
+            document.getElementById('signInForm').classList.add('hidden');
+            document.getElementById('signUpForm').classList.add('hidden');
+            document.getElementById('signInTab').classList.remove('active');
+            document.getElementById('signUpTab').classList.remove('active');
+            
+            if (form === 'signIn') {
+                document.getElementById('signInForm').classList.remove('hidden');
+                document.getElementById('signInTab').classList.add('active');
+            } else {
+                document.getElementById('signUpForm').classList.remove('hidden');
+                document.getElementById('signUpTab').classList.add('active');
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

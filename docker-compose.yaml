@@ -1,0 +1,35 @@
+services:
+  user-backend:
+    build:
+      context: ./backend
+    ports:
+      - 127.0.0.1:8080:8080
+    networks:
+      - galera-network
+
+  ml-service:
+    build:
+      context: ./ml-service
+    ports:
+      - 127.0.0.1:8000:8000
+    networks:
+      - galera-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # telegram-bot:
+  #   build:
+  #     context: ./bot
+  #   ports:
+  #     - 127.0.0.1:9000:9000
+  #   networks:
+  #     - galera-network
+
+networks:
+  galera-network:
+    driver: bridge

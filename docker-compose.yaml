@@ -22,6 +22,18 @@ services:
               count: 1
               capabilities: [gpu]
 
+  client:
+    build:
+      context: ./frontend/ReactClient
+    ports:
+      - 127.0.0.1:5173:5173
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - galera-network
+    volumes:
+      - ./frontend/ReactClient:/app
+      - /app/node_modules
   # telegram-bot:
   #   build:
   #     context: ./bot

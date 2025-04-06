@@ -40,8 +40,8 @@ export function MainPage() {
         <div ref={containerRef}>
             <Navbar />
             <Header scrollHandler={() => scrollToSection(0)} />
-            <AboutSection scrollHandler={user ? () => scrollToSection(1): () => scrollToSection(2)} />
-            {user ? <ImageProcessingSection scrollHandler={() => scrollToSection(2)} /> : null}
+            <AboutSection scrollHandler={() => scrollToSection(1)} />
+            <ImageProcessingSection scrollHandler={() => scrollToSection(2)} />
             <LinksSection />
             <Footer />
         </div>

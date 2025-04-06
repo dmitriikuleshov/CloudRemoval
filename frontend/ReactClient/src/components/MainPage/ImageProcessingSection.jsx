@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 export function ImageProcessingSection({ scrollHandler }) {
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -8,7 +9,7 @@ export function ImageProcessingSection({ scrollHandler }) {
   const [showResult, setShowResult] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const [file, setFile] = useState(null);
-  
+  const { user, loading } = useAuth();
   const fileInputRef = useRef(null);
   const processedImageRef = useRef(null);
 
@@ -116,9 +117,10 @@ export function ImageProcessingSection({ scrollHandler }) {
               }}
             >
               <input
+                disabled={!user || loading}
                 type="file"
                 id="file-input"
-                className="file-input"
+                className= {user ? 'file-input' : 'file-input disabled'}
                 accept="image/*"
                 onChange={handleFileUpload}
                 ref={fileInputRef}

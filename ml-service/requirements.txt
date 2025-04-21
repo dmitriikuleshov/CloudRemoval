@@ -1,6 +1,12 @@
 fastapi
 python-multipart
 uvicorn
+sqlalchemy
+psycopg2-binary
+python-jose[cryptography]
+bcrypt
+boto3
+
 diffusers
 transformers
 accelerate

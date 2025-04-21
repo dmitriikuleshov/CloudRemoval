@@ -8,7 +8,9 @@ from sqlalchemy.orm import Session
 from app.user.models import User
 from app.storage.models import Entry
 
-from app.storage.schemas import EntryResponse, UploadResponse
+from app.storage.schemas import (
+    EntryMetadateUpdate, EntryResponse, UploadResponse
+)
 
 from app.dependencies.user import get_user
 from app.dependencies.database import get_db
@@ -88,6 +90,26 @@ def get_entry_history(
         raise HTTPException(404, "Entry not found")
     
     return EntryResponse.from_entry(s3, entry)
+
+
+@router.post("/{entry_id}")
+def update_entry_metadata(
+    entry_id: UUID,
+    updates: EntryMetadateUpdate,
+    user: User = Depends(get_user),
+    db: Session = Depends(get_db)
+):
+    entry = Entry.from_uuid(db, entry_id)
+    if not entry or entry.user_id != user.id:
+        raise HTTPException(404, "Entry not found")
+    
+    if updates.name:
+        entry.name = updates.name
+    if updates.is_favourite:
+        entry.is_favourite = updates.is_favourite
+
+    db.commit()
+    raise HTTPException(200, "Entry metadata updated successfully")
 
 
 @router.delete("/{entry_id}")

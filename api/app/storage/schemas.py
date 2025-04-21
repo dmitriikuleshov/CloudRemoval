@@ -9,6 +9,11 @@ from app.storage.models import Entry, ResponseType
 from app.utils.s3 import create_download_link
 
 
+class EntryMetadateUpdate(BaseModel):
+    name: Optional[str]
+    is_favourite: Optional[bool]
+
+
 class EntryResponse(BaseModel):
     name: str
     is_favourite: bool

@@ -35,8 +35,6 @@ services:
       - 127.0.0.1:8080:8080
     networks:
       - cloud-removal
-    volumes:
-      - models:/models
     environment:
       - CLOUD_REMOVAL_DATABASE_URL
       - CLOUD_REMOVAL_S3_PUBLIC_URL
@@ -55,6 +53,8 @@ services:
       - 127.0.0.1:8100:8100
     networks:
       - cloud-removal
+    volumes:
+      - models:/models
     environment:
       - CLOUD_REMOVAL_DATABASE_URL
       - CLOUD_REMOVAL_S3_PUBLIC_URL
@@ -73,18 +73,18 @@ services:
               count: 1
               capabilities: [gpu]
 
-  # client:
-  #   build:
-  #     context: ./frontend/ReactClient
-  #   ports:
-  #     - 127.0.0.1:5173:5173
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true
-  #   networks:
-  #     - cloud-removal
-  #   volumes:
-  #     - ./frontend/ReactClient:/app
-  #     - /app/node_modules
+  client:
+    build:
+      context: ./frontend/ReactClient
+    ports:
+      - 127.0.0.1:5173:5173
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - cloud-removal
+    volumes:
+      - ./frontend/ReactClient:/app
+      - /app/node_modules
 
   # telegram-bot:
   #   build:

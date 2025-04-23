@@ -31,7 +31,6 @@ export function MainPage() {
     useEffect(() => {
         if (containerRef.current) {
             const elements = containerRef.current.querySelectorAll('section');
-            console.log(elements);
             setSections(Array.from(elements));
         }
     }, []);

@@ -171,6 +171,28 @@ export function AuthPage() {
                 />
               </div>
               <div className="mb-3">
+                <label htmlFor="name" className="form-label">NAME</label>
+                <input
+                  type="text"
+                  id="name"
+                  className="form-control"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="surname" className="form-label">SURNAME</label>
+                <input
+                  type="text"
+                  id="surname"
+                  className="form-control"
+                  value={formData.surname}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-3">
                 <label htmlFor="email" className="form-label">EMAIL</label>
                 <input
                   type="email"

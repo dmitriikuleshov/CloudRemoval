@@ -49,7 +49,7 @@ export function Navbar() {
                     {user ? (
                         <>
                             <li className="nav-item">
-                                <span className="nav-link text-primary">{user.username}</span>
+                                <Link className="nav-link text-primary" to="/profile">{user.username}</Link>
                             </li>
                             <li className="nav-item">
                                 <button 

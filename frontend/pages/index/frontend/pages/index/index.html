@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удаление Облаков</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/style1.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <img src="./img/project_logo.jpg" alt="Logo" class="logo-image">
+            </a>
+            <div class="brand-title">УДАЛЕНИЕ ОБЛАКОВ BY ГАЛЕРА</div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Главная</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Меню
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#description">О проекте</a></li>
+                            <li><a class="dropdown-item" href="#image_processing">Обработка изображений</a></li>
+                            <li><a class="dropdown-item" href="#links">Полезные ссылки</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Контакты</a>
+                    </li>
+                    <li class="nav-item login-btn-wrapper">
+                        <a class="login-btn" href="register.html">Войти</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header>
+        <video autoplay muted loop id="bg-video">
+            <source src="./static/videos/background.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <h1>Удаление Облаков</h1>
+        <div class="bottom-center">
+            <button class="scroll-down" onclick="scrollToSection(1)">▼</button>
+        </div>
+    </header>
+
+    <section id="description" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Описание проекта</h2>
+            
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6">
+                    <h3 class="mb-3">Зачем удалять облака?</h3>
+                    <p class="lead">Облака закрывают до 67% поверхности Земли на спутниковых снимках, скрывая критически важную информацию для исследователей и аналитиков.</p>
+                    <p>Наша система использует передовые алгоритмы искусственного интеллекта для точного удаления облаков с аэрокосмических снимков, восстанавливая скрытую под ними информацию с высокой степенью достоверности.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="image-comparison">
+                        <div class="before-after-label">
+                            <span>До</span>
+                            <span>После</span>
+                        </div>
+                        <div class="comparison-image-container">
+                            <!-- Фото с чистым -->
+                            <div class="comparison-image" style="background-image: url('./img/clear_sky.jpg');"></div>
+                            <!-- Фото с облаками -->
+                            <div class="comparison-image overlay" style="background-image: url('./img/cloud_sky.jpg');"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row features mt-5">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 16a.5.5 0 0 1-.5-.5v-1.293l-.646.647a.5.5 0 0 1-.707-.708L7.5 12.793v-1.51l-2.053-1.232-1.348.778-.495 1.85a.5.5 0 1 1-.966-.26l.237-.882-.94.542-.496 1.85a.5.5 0 1 1-.966-.26l.237-.882-1.12.646a.5.5 0 1 1-.5-.866l1.12-.646-.884-.237a.5.5 0 1 1 .26-.966l1.848.495.94-.542-.882-.237a.5.5 0 1 1 .258-.966l1.85.495L7 8l-1.236-2.053-1.85.495a.5.5 0 1 1-.258-.966l.883-.237-.94-.542-1.85.495a.5.5 0 0 1-.258-.966l.883-.237-1.12-.646a.5.5 0 1 1 .5-.866l1.12.646-.237-.883a.5.5 0 0 1 .966-.258l.495 1.849.94.542-.236-.883a.5.5 0 0 1 .966-.258l.495 1.849 1.348.778L7.5 4.717v-1.51L6.147 1.854a.5.5 0 1 1 .707-.708l.646.647V.5a.5.5 0 0 1 1 0v1.293l.647-.647a.5.5 0 1 1 .707.708L8.5 3.207v1.51l2.053 1.232 1.348-.778.495-1.85a.5.5 0 1 1 .966.26l-.236.882.94-.542.495-1.85a.5.5 0 1 1 .966.26l-.236.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.883.237a.5.5 0 1 1-.26.966l-1.848-.495-.94.542.883.237a.5.5 0 1 1-.26.966l-1.848-.495L9 8l1.236 2.053 1.849-.495a.5.5 0 0 1 .259.966l-.883.237.94.542 1.849-.495a.5.5 0 0 1 .259.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.236.883a.5.5 0 1 1-.966.258l-.495-1.849-.94-.542.236.883a.5.5 0 0 1-.966.258L9.4 9.84l-1.348-.778L8.5 11.293v1.51l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647V15.5a.5.5 0 0 1-.5.5"/>
+                            </svg>
+                        </div>
+                        <h4>Реконструкция</h4>
+                        <p>Алгоритм анализирует контекст изображения и воссоздаёт скрытую под облаками информацию с точностью до 95%</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                                <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9 9 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.4 10.4 0 0 1-.524 2.318l-.003.011a11 11 0 0 1-.244.637c-.079.186.074.394.273.362a22 22 0 0 0 .693-.125m.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6-3.004 6-7 6a8 8 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a11 11 0 0 0 .398-2"/>
+                            </svg>
+                        </div>
+                        <h4>AI-анализ</h4>
+                        <p>Нейронная сеть обучена на миллионах спутниковых снимков и распознаёт до 28 различных типов облачных образований</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+                            </svg>
+                        </div>
+                        <h4>Скорость</h4>
+                        <p>Обработка одного снимка происходит за считанные секунды благодаря оптимизированным алгоритмам и высокопроизводительным GPU</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <p class="lead">Используйте нашу технологию для исследования природных ресурсов, мониторинга сельскохозяйственных угодий, картографии и других важных задач.</p>
+            </div>
+        </div>
+        <div class="bottom-center">
+            <button class="scroll-down" onclick="scrollToSection(2)">▼</button>
+        </div>
+    </section>
+
+    <section id="image_processing">
+        <div class="container">
+            <h2 class="text-center">Обработка изображений</h2>
+            <div class="image-processing-container">
+                <div class="upload-container">
+                    <div class="dropzone">
+                        <div class="upload-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                            </svg>
+                        </div>
+                        <input type="file" id="file-input" class="file-input" accept="image/*">
+                        <label for="file-input" class="file-input-label">Прикрепите файл</label>
+                    </div>
+                </div>
+                <div class="result-container">
+                    <div class="result-box">
+                        <p class="result-placeholder">Результат обработки</p>
+                        <!-- Индикатор загрузки (изначально скрыт) -->
+                        <div class="processing-indicator" style="display: none;">
+                            <div class="spinner"></div>
+                            <p>Обработка изображения...</p>
+                        </div>
+                        <!-- Результат обработки (изначально скрыт) -->
+                        <div class="processed-result" style="display: none;">
+                            <img id="processed-image" src="" alt="Обработанное изображение">
+                        </div>
+                        <!-- Кнопки действий после обработки (изначально скрыты) -->
+                        <div class="action-buttons" style="display: none;">
+                            <button class="like-btn" title="Нравится">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                                </svg>
+                            </button>
+                            <button class="reprocess-btn" title="Обработать заново">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="generate-btn-container">
+                <button class="generate-btn" id="generate-btn">Generate</button>
+            </div>
+        </div>
+        <div class="bottom-center">
+            <button class="scroll-down" onclick="scrollToSection(3)">▼</button>
+        </div>
+    </section>
+
+    <!-- Секция Ссылки -->
+    <section id="links" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Полезные ссылки</h2>
+            
+            <div class="links-grid">
+                <!-- Научные материалы -->
+                <div class="link-card research">
+                    <div class="link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5z"/>
+                            <path d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z"/>
+                        </svg>
+                    </div>
+                    <h3>Научные публикации</h3>
+                    <ul class="link-list">
+                        <li><a href="#" target="_blank">Методы обработки спутниковых снимков для удаления облаков</a></li>
+                        <li><a href="#" target="_blank">Алгоритмы глубокого обучения для реконструкции ландшафта</a></li>
+                        <li><a href="#" target="_blank">Применение GAN для устранения помех на изображениях</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Инструменты -->
+                <div class="link-card tools">
+                    <div class="link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
+                        </svg>
+                    </div>
+                    <h3>API и технологии</h3>
+                    <ul class="link-list">
+                        <li><a href="#" target="_blank">Документация REST API</a></li>
+                        <li><a href="#" target="_blank">GitHub репозиторий проекта</a></li>
+                        <li><a href="#" target="_blank">Набор данных для тренировки моделей</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Обучающие материалы -->
+                <div class="link-card learning">
+                    <div class="link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z"/>
+                            <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z"/>
+                        </svg>
+                    </div>
+                    <h3>Обучающие материалы</h3>
+                    <ul class="link-list">
+                        <li><a href="#" target="_blank">Введение в обработку спутниковых снимков</a></li>
+                        <li><a href="#" target="_blank">Видео-курс по работе с нашим API</a></li>
+                        <li><a href="#" target="_blank">Сферы применения</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Телеграм бот -->
+                <div class="link-card partners">
+                    <div class="link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5M3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.58 26.58 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.933.933 0 0 1-.765.935c-.845.147-2.34.346-4.235.346-1.895 0-3.39-.2-4.235-.346A.933.933 0 0 1 3 9.219zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a24.767 24.767 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25.286 25.286 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135"/>
+                            <path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2zM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5"/>
+                        </svg>
+                    </div>
+                    <h3>Телеграм бот</h3>
+                    <ul class="link-list">
+                        <li><a href="#" target="_blank">Начать работу с ботом</a></li>
+                        <li><a href="#" target="_blank">Инструкция по использованию</a></li>
+                        <li><a href="#" target="_blank">Премиум функции</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <h3>Галера</h3>
+            <p class="footer-text">...</p>
+            <div class="footer-contacts">
+                <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                    <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.5.5 0 0 0 .178.643l2.457 2.457a.5.5 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                </svg> +79999999999 
+                </a>
+                <a>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                </svg> support@cloudclear.ru
+                </a>
+            </div>
+        </div>
+        <div class="container ">
+            <h3>Наши социальные сети</h3>
+            <div class="social-links">
+                <!-- ВКонтакте -->
+                <a href="#" class="social-link" title="ВКонтакте">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 16.611h-1.729c-.583 0-.775-.128-1.12-.485-.347-.358-1.289-1.289-1.775-1.612-.336-.224-.368-.128-.368.224v1.353c0 .336-.112.52-.52.52h-.893c-1.009 0-2.221-.055-3.358-1.307-1.542-1.656-2.996-4.547-2.996-4.974 0-.183.111-.336.447-.336h1.716c.459 0 .571.235.694.583.571 1.68 1.586 3.149 2.01 3.149.173 0 .235-.084.235-.55v-1.903c-.054-.888-.505-1.01-.505-1.345 0-.173.137-.336.359-.336h2.657c.347 0 .459.168.459.571v2.552c0 .296.122.392.223.392.173 0 .324-.095.627-.392 1.009-1.137 1.716-2.873 1.716-2.873.097-.2.292-.381.662-.381h1.716c.492 0 .604.264.492.571-.207.961-2.191 3.724-2.191 3.724-.173.291-.235.403 0 .682.175.209.748.771 1.137 1.227.694.784 1.196 1.465 1.329 1.923.145.47-.097.706-.547.706z"/>
+                    </svg>
+                </a>
+                <!-- Telegram -->
+                <a href="#" class="social-link" title="Telegram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                    </svg>
+                </a>
+                <!-- X (Twitter) -->
+                <a href="#" class="social-link" title="X (Twitter)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                    </svg>
+                </a>
+                <!-- GitHub -->
+                <a href="#" class="social-link" title="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.23.48-2.69-1.08-2.69-1.08-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.82 1.23.82.72 1.21 1.88.86 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="container">
+            <h3>Свяжитесь с нами</h3>
+            <form class="contact-us" action="#" method="post">
+                <input class="email-input" type="text" name="email" placeholder="Ваш email" required><br>
+                <textarea class="message-input" name="message" placeholder="Ваше сообщение" required></textarea><br>
+                <button class="submit-button" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                    <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                  </svg> Отправить</button>
+            </form>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./static/js/script.js"></script>
+</body>
+</html>

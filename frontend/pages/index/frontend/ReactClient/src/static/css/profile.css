@@ -1,0 +1,516 @@
+body {
+    background: url('./static/videos/1479.gif') center/cover no-repeat fixed;
+}
+
+.profile-header {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(61, 169, 252, 0.3);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.back-to-home {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: rgba(61, 169, 252, 0.1);
+}
+
+.back-to-home:hover {
+    color: #3da9fc;
+    background: rgba(61, 169, 252, 0.2);
+    transform: translateY(-2px);
+}
+
+.house-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.profile-container {
+    margin-top: 20px;
+    padding: 2rem;
+}
+
+.personal-info {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(61, 169, 252, 0.3);
+}
+
+.personal-info::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(61, 169, 252, 0.1) 0%, transparent 70%);
+    animation: cloudMove 20s linear infinite;
+}
+
+@keyframes cloudMove {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(50px, 30px); }
+    100% { transform: translate(0, 0); }
+}
+
+.personal-info h2 {
+    color: #3da9fc;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.personal-info h2::before {
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: #3da9fc;
+}
+
+.info-item {
+    margin-bottom: 1.5rem;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(61, 169, 252, 0.05);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.info-item:hover {
+    background: rgba(61, 169, 252, 0.1);
+    transform: translateX(5px);
+}
+
+.info-label {
+    color: #3da9fc;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.gallery-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 2rem;
+}
+
+.gallery-btn {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.gallery-btn:hover {
+    background: #3da9fc;
+    transform: translateY(-2px);
+}
+
+.gallery-btn.active {
+    background: #3da9fc;
+}
+
+.gallery {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 1rem;
+}
+
+.gallery.active {
+    display: grid;
+}
+
+.gallery-item {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    border-color: rgba(61, 169, 252, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.gallery-item-info {
+    padding: 1rem;
+    color: white;
+}
+
+.gallery-item-date {
+    color: #3da9fc;
+    font-size: 0.9rem;
+}
+
+.logout-btn {
+    background: linear-gradient(45deg, #ef4565, #ff6b6b);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(239, 69, 101, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 69, 101, 0.4);
+    background: linear-gradient(45deg, #ff6b6b, #ef4565);
+}
+
+.logout-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(239, 69, 101, 0.3);
+}
+
+.logout-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+    border-radius: 25px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logout-btn:hover::before {
+    opacity: 1;
+}
+
+/* Стили для панели действий с фото */
+.gallery-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(61, 169, 252, 0.3);
+}
+
+.action-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.download-btn {
+    background: #2ecc71;
+}
+
+.download-btn:hover {
+    background: #27ae60;
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: #e74c3c;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
+.action-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.action-btn.active {
+    box-shadow: 0 0 15px rgba(61, 169, 252, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Стили для чекбокса выбора фото */
+.photo-select {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none; /* Скрываем по умолчанию */
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.selection-mode .photo-select {
+    display: flex; /* Показываем только в режиме выбора */
+}
+
+.photo-select:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+}
+
+.photo-select.selected {
+    background: #3da9fc;
+    border-color: #fff;
+}
+
+.photo-select.selected::after {
+    content: '✓';
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    transform: translateY(-1px);
+}
+
+/* Добавляем затемнение при наведении на фото */
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+/* Стили для выбранных элементов галереи */
+.gallery-item.selected::after {
+    opacity: 1;
+    background: rgba(61, 169, 252, 0.3);
+}
+
+.selection-count {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+    border: 2px solid rgba(61, 169, 252, 0.3);
+}
+
+.selection-count.visible {
+    display: flex;
+}
+
+.selection-count button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.selection-count .cancel-selection {
+    color: #e74c3c;
+}
+
+.selection-count .confirm-selection {
+    color: #2ecc71;
+}
+
+.selection-count button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Стили для модального окна с фото */
+.photo-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-image-container {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.modal-side {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.modal-side.left {
+    left: 0;
+}
+
+.modal-side.right {
+    right: 0;
+}
+
+.modal-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(61, 169, 252, 0.3);
+    z-index: 3;
+}
+
+.modal-nav button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-nav button:hover {
+    background: rgba(61, 169, 252, 0.2);
+    transform: scale(1.1);
+}
+
+.modal-nav button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.modal-nav button svg {
+    width: 24px;
+    height: 24px;
+}

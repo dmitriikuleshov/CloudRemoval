@@ -17,6 +17,11 @@ class ResponseType(str, enum.Enum):
     failure = "failure"
 
 
+class SourceType(str, enum.Enum):
+    user = "user"
+    sentinel = "sentinel"
+
+
 class Status(Base):
     __tablename__ = "entry_status"
 
@@ -50,6 +55,7 @@ class Entry(Base):
     name = Column(String, default="", nullable=False)
     is_favourite = Column(Boolean, default=False)
     timestamp = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    source = Column(Enum(SourceType), default=SourceType.user, nullable=False)
 
     status_id = Column(Integer, ForeignKey("entry_status.id"), unique=True)
     file_data_id = Column(Integer, ForeignKey("file_data.id"), unique=True)
@@ -59,7 +65,7 @@ class Entry(Base):
     status = relationship("Status", back_populates="entry", uselist=False)
 
 
-    def create(db: Session, user: User):
+    def create(db: Session, user: User, source: SourceType):
         status = Status(in_progress=False, response=ResponseType.success)
         file_data = FileData()
 
@@ -72,6 +78,7 @@ class Entry(Base):
         entry = Entry(
             user_id=user.id,
             status_id=status.id,
+            source=source,
             file_data_id=file_data.id
         )
         db.add(entry)

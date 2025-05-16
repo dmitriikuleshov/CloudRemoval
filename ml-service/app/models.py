@@ -16,6 +16,11 @@ class ResponseType(str, enum.Enum):
     failure = "failure"
 
 
+class SourceType(str, enum.Enum):
+    user = "user"
+    sentinel = "sentinel"
+
+
 class Status(Base):
     __tablename__ = "entry_status"
 
@@ -49,6 +54,7 @@ class Entry(Base):
     name = Column(String, default="", nullable=False)
     is_favourite = Column(Boolean, default=False)
     timestamp = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    source = Column(Enum(SourceType), default=SourceType.user, nullable=False)
 
     status_id = Column(Integer, ForeignKey("entry_status.id"), unique=True)
     file_data_id = Column(Integer, ForeignKey("file_data.id"), unique=True)

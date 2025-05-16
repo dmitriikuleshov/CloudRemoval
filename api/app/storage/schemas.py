@@ -4,7 +4,7 @@ from datetime import datetime
 import boto3
 from pydantic import BaseModel
 
-from app.storage.models import Entry, ResponseType
+from app.storage.models import Entry, ResponseType, SourceType
 
 from app.utils.s3 import create_download_link
 
@@ -18,6 +18,7 @@ class EntryResponse(BaseModel):
     name: str
     is_favourite: bool
     timestamp: datetime
+    source: SourceType
 
     source_url: str
     upscaled_url: Optional[str] = None
@@ -36,6 +37,7 @@ class EntryResponse(BaseModel):
             name=entry.name,
             is_favourite=entry.is_favourite,
             timestamp=entry.timestamp,
+            source=entry.source,
             source_url=create_download_link(s3, entry.file.source_key),
             upscaled_url=create_download_link(s3, entry.file.upscaled_key),
             result_url=create_download_link(s3, entry.file.result_key),

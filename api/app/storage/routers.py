@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from app.user.models import User
-from app.storage.models import Entry
+from app.storage.models import Entry, SourceType
 
 from app.storage.schemas import (
     EntryMetadateUpdate, EntryResponse, UploadResponse
@@ -65,7 +65,7 @@ def generate_s3_upload_link(
     if not (url := create_upload_link(s3, key)):
         raise HTTPException(500, "Unable to generate an upload link")
     
-    entry = Entry.create(db, user)
+    entry = Entry.create(db, user, SourceType.user)
     entry.file.source_key = key
     db.commit()
 

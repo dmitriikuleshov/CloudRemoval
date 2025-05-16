@@ -20,17 +20,14 @@ class EntryResponse(BaseModel):
     timestamp: datetime
     source: SourceType
 
-    source_url: str
-    upscaled_url: Optional[str] = None
-    result_url: Optional[str] = None
-
     in_progress: bool
     success: bool
 
+    source_url: str
+    result_url: Optional[str] = None
 
     class Config:
         from_attributes = True
-
 
     def from_entry(s3: boto3.client, entry: Entry):            
         return EntryResponse(
@@ -39,11 +36,33 @@ class EntryResponse(BaseModel):
             timestamp=entry.timestamp,
             source=entry.source,
             source_url=create_download_link(s3, entry.file.source_key),
-            upscaled_url=create_download_link(s3, entry.file.upscaled_key),
             result_url=create_download_link(s3, entry.file.result_key),
             in_progress=entry.status.in_progress,
             success=(entry.status.response == ResponseType.success),
         )
+
+
+class UserEntryResponse(EntryResponse):
+    upscaled_url: Optional[str] = None
+
+    def from_entry(s3: boto3.client, entry: Entry):
+        base = EntryResponse.from_entry(s3, entry).dict()
+        return UserEntryResponse(
+            **base,
+            upscaled_url=create_download_link(s3, entry.file.upscaled_key)
+        )
+    
+
+class SentinelHubEntryResponse(EntryResponse):
+    sar_url: str
+
+    def from_entry(s3: boto3.client, entry: Entry):
+        base = EntryResponse.from_entry(s3, entry).dict()
+        return SentinelHubEntryResponse(
+            **base,
+            sar_url=create_download_link(s3, entry.file.sar_key)
+        )
+        
 
 
 class UploadResponse(BaseModel):

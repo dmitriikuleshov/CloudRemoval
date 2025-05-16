@@ -83,22 +83,18 @@ def delete_from_bucket(
 ) -> Dict[str, List[str]]:
 
     if not keys:
-        return {"deleted": [], "failed": []}
+        return False
 
     try:
-        response = s3.delete_objects(
+        s3.delete_objects(
             Bucket=bucket,
             Delete={
                 "Objects": [{"Key": key} for key in keys],
                 "Quiet": True
             }
         )
-
-        deleted_keys = [obj["Key"] for obj in response.get("Deleted", [])]
-        failed_keys = [err["Key"] for err in response.get("Errors", [])]
-
-        return {"deleted": deleted_keys, "failed": failed_keys}
+        return True
 
     except ClientError as e:
         print(f"Batch deletion failed: {e}")
-        return {"deleted": [], "failed": keys}
+        return False

@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.auth.routers import router as auth_router
 from app.user.routers import router as user_router
 from app.storage.routers import router as storage_router
+from app.sentinel_hub.router import router as sentinel_router
 
 from app.dependencies.s3 import test_s3
 from app.dependencies.database import engine, Base, test_db
@@ -29,6 +30,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(user_router)
 app.include_router(storage_router)
+app.include_router(sentinel_router)
 
 # Initialize the database
 Base.metadata.create_all(bind=engine)

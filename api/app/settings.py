@@ -21,3 +21,7 @@ class S3:
     access_key = env("S3_ACCESS_KEY")
     secret_key = env("S3_SECRET_KEY")
     bucket = env("S3_BUCKET")
+
+class SentinelHub:
+    client_id = environ.get("SENTINEL_CLIENT_ID")
+    client_secret=environ.get("SENTINEL_CLIENT_SECRET")

@@ -9,7 +9,8 @@ from app.user.models import User
 from app.storage.models import Entry, SourceType
 
 from app.storage.schemas import (
-    EntryMetadateUpdate, EntryResponse, UploadResponse
+    UserEntryResponse, SentinelHubEntryResponse,
+    EntryMetadateUpdate, UploadResponse
 )
 
 from app.dependencies.user import get_user
@@ -43,7 +44,11 @@ def search_entries(
 
     results = {}
     for entry in Entry.from_user(db, user, limit, offset):
-        results[entry.uuid] = EntryResponse.from_entry(s3, entry)
+        if entry.source == SourceType.user:
+            response = UserEntryResponse.from_entry(s3, entry)
+        elif entry.source == SourceType.sentinel_hub:
+            response = SentinelHubEntryResponse.from_entry(s3, entry)
+        results[entry.uuid] = response
 
     return results
 
@@ -61,7 +66,7 @@ def generate_s3_upload_link(
     for uploading a file directly to S3.
     """
 
-    key = str(uuid4())
+    key = f"{str(uuid4())}.png"
     if not (url := create_upload_link(s3, key)):
         raise HTTPException(500, "Unable to generate an upload link")
     
@@ -89,7 +94,10 @@ def get_entry_history(
     if not entry or entry.user_id != user.id:
         raise HTTPException(404, "Entry not found")
     
-    return EntryResponse.from_entry(s3, entry)
+    if entry.source == SourceType.user:
+        return UserEntryResponse.from_entry(s3, entry)
+    elif entry.source == SourceType.sentinel_hub:
+        return SentinelHubEntryResponse.from_entry(s3, entry)
 
 
 @router.post("/{entry_id}")
@@ -124,7 +132,8 @@ def delete_entry(
         raise HTTPException(status_code=404, detail="Entry not found")
 
     keydata = entry.file
-    all_keys = (keydata.source_key, keydata.upscaled_key, keydata.result_key)
+    all_keys = (keydata.source_key, keydata.upscaled_key, 
+                keydata.sar_key, keydata.result_key)
     
     # Firstly, delete the models
     db.delete(entry.file)
@@ -134,12 +143,10 @@ def delete_entry(
 
     # Secondly, delete the images from object storage
     keys = [key for key in all_keys if key]
-    results = delete_from_bucket(s3, [])
+    results = delete_from_bucket(s3, keys)
     
-    if len(results["deleted"]) == len(keys):
-        raise HTTPException(
-            status_code=204, 
-            detail={"message": "Entry successfully deleted"})
+    if results:
+        raise HTTPException(status_code=204)
     else:
         raise HTTPException(
             status_code=207, 

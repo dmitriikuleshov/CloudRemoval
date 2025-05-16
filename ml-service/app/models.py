@@ -18,7 +18,7 @@ class ResponseType(str, enum.Enum):
 
 class SourceType(str, enum.Enum):
     user = "user"
-    sentinel = "sentinel"
+    sentinel_hub = "sentinel_hub"
 
 
 class Status(Base):
@@ -37,7 +37,8 @@ class FileData(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     source_key = Column(String)
-    upscaled_key = Column(String)
+    upscaled_key = Column(String, default="")
+    sar_key = Column(String, default="")
     result_key = Column(String)
 
     # Entry relationship (one-to-one)

@@ -8,3 +8,4 @@ uvicorn
 bcrypt
 boto3
 python-multipart
+sentinelhub

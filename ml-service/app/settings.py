@@ -4,6 +4,9 @@ from os import environ
 def env(parameter, default_value = None):
     return environ.get(f"CLOUD_REMOVAL_{parameter}", default_value)
 
+class Runtime:
+    enable_upscaling = env("ENABLE_UPSCALING", 0)
+
 
 class Database:
     url = env("DATABASE_URL", "sqlite:///cloud_removal.db")

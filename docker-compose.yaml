@@ -67,6 +67,7 @@ services:
       - CLOUD_REMOVAL_S3_BUCKET
       - CLOUD_REMOVAL_JWT_SECRET
       - CLOUD_REMOVAL_JWT_ALGORITHM
+      - CLOUD_REMOVAL_ENABLE_UPSCALING
     deploy:
       resources:
         reservations:

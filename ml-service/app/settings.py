@@ -1,11 +1,13 @@
 from os import environ
+from typing import Any
 
 
-def env(parameter, default_value = None):
+def env(parameter, default_value = None) -> Any:
     return environ.get(f"CLOUD_REMOVAL_{parameter}", default_value)
 
+
 class Runtime:
-    enable_upscaling = env("ENABLE_UPSCALING", 0)
+    enable_upscaling = int(env("ENABLE_UPSCALING", 0))
 
 
 class Database:

@@ -40,10 +40,11 @@ def run_process(
         status, message = 500, "Unable to perform the inference"
 
     else:
+        entry.file.result_key = target_key
         entry.status.response = ResponseType.success
         status, message = 200, "Processing completed successfully"
 
     entry.status.in_progress = False
     db.commit()
-    
+
     return status, message

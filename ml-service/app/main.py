@@ -1,8 +1,10 @@
 import logging
 from uuid import UUID, uuid4
 
+import asyncio
 import boto3
 from fastapi import FastAPI, HTTPException, Depends
+from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.orm import Session
 
 from app import settings
@@ -23,7 +25,7 @@ app = FastAPI()
 
 
 @app.get("/cloud-remove")
-def image_cloud_removal(
+async def image_cloud_removal(
     entry_id: UUID,
     user_id: int = Depends(validate_user),
     db: Session = Depends(get_db),
@@ -36,13 +38,10 @@ def image_cloud_removal(
     source_key = entry.file.upscaled_key or entry.file.source_key
     target_key = entry.file.result_key or str(uuid4())
 
-    status, message = run_process(
+    status, message = await asyncio.shield(run_in_threadpool(
+        run_process,
         remove_clouds_from_image, source_key, target_key, entry, db, s3
-    )
-
-    if status == 200:
-        entry.file.result_key = target_key
-        db.commit()
+    ))
 
     raise HTTPException(status, message)
 
@@ -51,7 +50,7 @@ if settings.Runtime.enable_upscaling:
     from app.networks.upscaler.functions import upscale_image
 
     @app.get("/upscale")
-    def image_upscale(
+    async def image_upscale(
         entry_id: UUID,
         user_id: int = Depends(validate_user),
         db: Session = Depends(get_db),
@@ -64,9 +63,10 @@ if settings.Runtime.enable_upscaling:
         source_key = entry.file.source_key
         target_key = entry.file.upscaled_key or str(uuid4())
 
-        status, message = run_process(
+        status, message = await asyncio.shield(run_in_threadpool(
+            run_process,
             upscale_image, source_key, target_key, entry, db, s3
-        )
+        ))
 
         if status == 200:
             entry.file.upscaled_key = target_key

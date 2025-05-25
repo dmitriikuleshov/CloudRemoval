@@ -1,5 +1,5 @@
 from datetime import datetime, date
-from typing import Tuple, List
+from typing import Tuple, Dict
 from uuid import uuid4
 from io import BytesIO
 
@@ -66,8 +66,8 @@ class SentinelHubService:
         self.config.sh_client_id = settings.SentinelHub.client_id
         self.config.sh_client_secret = settings.SentinelHub.client_secret
         self.s3_client = get_s3_client()
-    
-    def search_and_save_images(self, search_date, coords) -> List[str]:
+
+    def search_and_save_images(self, search_date, coords) -> Dict[str, str]:
         bbox = BBox(bbox=coords, crs=CRS.WGS84)
 
         search_date = date(2023, 6, 1), date(2023, 6, 30)

@@ -15,43 +15,39 @@ export function ImageProcessingSection({ scrollHandler }) {
   const [showActions, setShowActions] = useState(false);
   const [file, setFile] = useState(null);
   const [entryId, setEntryId] = useState(null);
-  const [isFavourite, setIsFavourite] = useState(false);
   const { user, loading } = useAuth();
   const fileInputRef = useRef(null);
   const processedImageRef = useRef(null);
 
-const handleLike = async () => {
-  if (!entryId) {
-    alert('Сначала обработайте изображение');
-    return;
-  }
-
-  try {
-    const response = await fetch(`http://localhost:8080/storage/${entryId}`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        is_favourite: !isFavourite,
-        name: entryId,
-      })
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.detail || 'Ошибка обновления');
+  const handleDownload = async () => {
+    try {
+      if (!processedImage) {
+        alert('Сначала обработайте изображение');
+        return;
+      }
+  
+      const response = await fetch(processedImage);
+      
+      if (!response.ok) throw new Error('Ошибка загрузки изображения');
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `processed-image-${Date.now()}.${blob.type.split('/')[1]}`;
+      
+      document.body.appendChild(link);
+      link.click();
+      
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Ошибка скачивания:', error);
+      alert(error.message);
     }
+  };
 
-    const updatedEntry = await fetchEntryInfo(entryId);
-    setIsFavourite(updatedEntry.is_favourite);
-
-  } catch (error) {
-    console.error('Ошибка лайка:', error);
-    alert(error.message);
-  }
-};
   const getUploadUrl = async () => {
     const response = await fetch('http://localhost:8080/storage', {
       method: 'PUT',
@@ -295,13 +291,12 @@ const handleLike = async () => {
               {showActions && (
                 <div className="action-buttons">
                   <button 
-                    className="like-btn" 
-                    title="Нравится"
-                    onClick={handleLike}
-                    style={{ fill: isFavourite ? '#ff3b3b' : 'currentColor' }}
+                    className="download-btn" 
+                    title="Скачать изображение"
+                    onClick={handleDownload}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                      <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                      <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
                     </svg>
                   </button>
                   <button 

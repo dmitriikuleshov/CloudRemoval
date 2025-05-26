@@ -30,7 +30,8 @@ services:
       - postgres
       - minio
     build:
-      context: api
+      context: backend
+      dockerfile: api/Dockerfile
     ports:
       - 127.0.0.1:8080:8080
     networks:
@@ -50,7 +51,8 @@ services:
 
   ml:
     build:
-      context: ./ml-service
+      context: backend
+      dockerfile: ml/Dockerfile
     ports:
       - 127.0.0.1:8100:8100
     networks:

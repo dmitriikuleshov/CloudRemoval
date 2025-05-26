@@ -5,7 +5,8 @@ from datetime import datetime, timezone
 
 from sqlalchemy.orm import Session, relationship
 from sqlalchemy import (
-    select, Column, Integer, String, ForeignKey, Boolean, Enum, DateTime
+    select, Column, Integer, String, ForeignKey,
+    Boolean, Enum, DateTime, Float
 )
 
 from app.dependencies.database import Base
@@ -56,6 +57,11 @@ class Entry(Base):
     is_favourite = Column(Boolean, default=False)
     timestamp = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     source = Column(Enum(SourceType), default=SourceType.user, nullable=False)
+
+    # This fields are used by Sentinel Hub images
+    longitude = Column(Float, default=0.0, nullable=False)
+    latitude = Column(Float, default=0.0, nullable=False)
+    month = Column(Integer, default=1, nullable=False)
 
     status_id = Column(Integer, ForeignKey("entry_status.id"), unique=True)
     file_data_id = Column(Integer, ForeignKey("file_data.id"), unique=True)

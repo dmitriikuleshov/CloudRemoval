@@ -70,10 +70,6 @@ class SentinelHubService:
     def search_and_save_images(self, search_date, coords) -> Dict[str, str]:
         bbox = BBox(bbox=coords, crs=CRS.WGS84)
 
-        search_date = date(2023, 6, 1), date(2023, 6, 30)
-        coords_wgs84 = [37.4, 55.5, 37.8, 55.9]
-        bbox = BBox(bbox=coords_wgs84, crs=CRS.WGS84)
-        
         requests = {
             "rgb": SentinelHubRequest(
                 evalscript=RGB_EVALSCRIPT,

@@ -2,6 +2,11 @@ import { useState, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 export function ImageProcessingSection({ scrollHandler }) {
+  const containerStyle = {
+    width: '500px',
+    height: '400px',
+    position: 'relative',
+  };
   const [uploadedImage, setUploadedImage] = useState(null);
   const [processedImage, setProcessedImage] = useState(null);
   const [fileName, setFileName] = useState('Прикрепите файл');
@@ -9,17 +14,91 @@ export function ImageProcessingSection({ scrollHandler }) {
   const [showResult, setShowResult] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const [file, setFile] = useState(null);
+  const [entryId, setEntryId] = useState(null);
+  const [isFavourite, setIsFavourite] = useState(false);
   const { user, loading } = useAuth();
   const fileInputRef = useRef(null);
   const processedImageRef = useRef(null);
 
-  const API_URL = 'http://localhost:8000/cloud-remove/';
+const handleLike = async () => {
+  if (!entryId) {
+    alert('Сначала обработайте изображение');
+    return;
+  }
 
-  // Стили для контейнеров
-  const containerStyle = {
-    width: '500px',
-    height: '400px',
-    position: 'relative',
+  try {
+    const response = await fetch(`http://localhost:8080/storage/${entryId}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        is_favourite: !isFavourite,
+        name: entryId,
+      })
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.detail || 'Ошибка обновления');
+    }
+
+    const updatedEntry = await fetchEntryInfo(entryId);
+    setIsFavourite(updatedEntry.is_favourite);
+
+  } catch (error) {
+    console.error('Ошибка лайка:', error);
+    alert(error.message);
+  }
+};
+  const getUploadUrl = async () => {
+    const response = await fetch('http://localhost:8080/storage', {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+      }
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.detail || 'Ошибка получения URL загрузки');
+    }
+    return await response.json();
+  };
+
+  const uploadToS3 = async (url, file) => {
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'image/png',
+        'x-amz-acl': 'private'
+      },
+      body: file
+    });
+    if (!response.ok) throw new Error('Ошибка загрузки файла');
+  };
+
+  const triggerCloudRemove = async (entryId) => {
+    const response = await fetch(`http://localhost:8100/cloud-remove?entry_id=${entryId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+      }
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.detail || 'Ошибка запуска обработки');
+    }
+  };
+
+  const fetchEntryInfo = async (entryId) => {
+    const response = await fetch(`http://localhost:8080/storage/${entryId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+      }
+    });
+    if (!response.ok) throw new Error('Ошибка получения статуса');
+    return await response.json();
   };
 
   const handleFileUpload = (e) => {
@@ -31,46 +110,69 @@ export function ImageProcessingSection({ scrollHandler }) {
         setFileName(file.name);
         setFile(file);
         setProcessedImage(null);
+        setEntryId(null);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const processImage = async (file) => {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error('Ошибка обработки изображения');
-    }
-
-    return await response.blob();
-  };
-
   const handleGenerate = async () => {
     if (!file) {
-      alert('Пожалуйста, сначала загрузите изображение');
+      alert('Пожалуйста, загрузите изображение');
       return;
     }
-
+  
+    setIsProcessing(true);
     setShowResult(false);
     setShowActions(false);
-    setIsProcessing(true);
-
+  
     try {
-      const blob = await processImage(file);
-      const processedImageUrl = URL.createObjectURL(blob);
-      setProcessedImage(processedImageUrl);
+      const uploadResponse = await fetch('http://localhost:8080/storage', {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
       
+      if (!uploadResponse.ok) throw new Error('Ошибка получения ссылки загрузки');
+      const { url: uploadUrl, entry: entryId } = await uploadResponse.json();
+      setEntryId(entryId);
+  
+      await fetch(uploadUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'image/png',
+          'x-amz-acl': 'private',
+        },
+        body: file,
+      });
+  
+      const processResponse = await fetch(
+        `http://localhost:8100/cloud-remove?entry_id=${entryId}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        }
+      );
+  
+      if (!processResponse.ok) throw new Error('Ошибка запуска обработки');
+  
+      const entryInfo = await fetch(
+        `http://localhost:8080/storage/${entryId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        }
+      ).then((res) => res.json());
+  
+      if (!entryInfo.result_url) throw new Error('Результат недоступен');
+      setProcessedImage(entryInfo.result_url);
       setShowResult(true);
       setShowActions(true);
     } catch (error) {
-      console.error('Ошибка:', error);
       alert(error.message);
     } finally {
       setIsProcessing(false);
@@ -78,21 +180,35 @@ export function ImageProcessingSection({ scrollHandler }) {
   };
 
   const handleReprocess = async () => {
-    if (!file) return;
+    if (!entryId) return;
 
+    setIsProcessing(true);
     setShowResult(false);
     setShowActions(false);
-    setIsProcessing(true);
 
     try {
-      const blob = await processImage(file);
-      const processedImageUrl = URL.createObjectURL(blob);
-      setProcessedImage(processedImageUrl);
-      
+      await triggerCloudRemove(entryId);
+
+      let entryInfo;
+      let attempts = 0;
+      const maxAttempts = 10;
+      const delay = 2000;
+
+      while (attempts < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, delay));
+        entryInfo = await fetchEntryInfo(entryId);
+        if (entryInfo.success) break;
+        attempts++;
+      }
+
+      if (!entryInfo?.success) {
+        throw new Error('Обработка не завершена');
+      }
+
+      setProcessedImage(entryInfo.result_url);
       setShowResult(true);
       setShowActions(true);
     } catch (error) {
-      console.error('Ошибка:', error);
       alert(error.message);
     } finally {
       setIsProcessing(false);
@@ -144,7 +260,11 @@ export function ImageProcessingSection({ scrollHandler }) {
 
           {/* Контейнер для результата */}
           <div className="result-container" style={containerStyle}>
-            <div className="result-box">
+            <div className="result-box" style={{ 
+              width: "100%", 
+              height: "100%", 
+              position: "absolute" 
+            }}>
               {!showResult && (
                 <p className="result-placeholder">Результат обработки</p>
               )}
@@ -165,6 +285,7 @@ export function ImageProcessingSection({ scrollHandler }) {
                     style={{
                       width: '100%',
                       height: '100%',
+                      position: 'relative',
                       objectFit: 'cover'
                     }}
                   />
@@ -173,7 +294,12 @@ export function ImageProcessingSection({ scrollHandler }) {
 
               {showActions && (
                 <div className="action-buttons">
-                  <button className="like-btn" title="Нравится">
+                  <button 
+                    className="like-btn" 
+                    title="Нравится"
+                    onClick={handleLike}
+                    style={{ fill: isFavourite ? '#ff3b3b' : 'currentColor' }}
+                  >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
                       <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
                     </svg>

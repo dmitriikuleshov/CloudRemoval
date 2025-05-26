@@ -5,6 +5,7 @@ import asyncio
 import boto3
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.concurrency import run_in_threadpool
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from app import settings
@@ -22,6 +23,14 @@ test_db()
 test_s3()
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/cloud-remove")

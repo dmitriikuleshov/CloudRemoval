@@ -55,14 +55,19 @@ class UserEntryResponse(EntryResponse):
 
 class SentinelHubEntryResponse(EntryResponse):
     sar_url: str
+    longitude: float
+    latitude: float
+    month: int
 
     def from_entry(s3: boto3.client, entry: Entry):
         base = EntryResponse.from_entry(s3, entry).dict()
         return SentinelHubEntryResponse(
             **base,
-            sar_url=create_download_link(s3, entry.file.sar_key)
+            sar_url=create_download_link(s3, entry.file.sar_key),
+            longitude=entry.longitude,
+            latitude=entry.latitude,
+            month=entry.month
         )
-        
 
 
 class UploadResponse(BaseModel):

@@ -8,7 +8,7 @@ from pydantic import BaseModel
 class SentinelRequest(BaseModel):
     start: datetime
     end: datetime
-    coordinates: Tuple[float, float, float, float]
+    coordinates: Tuple[float, float]
 
 
 class SentinelResponse(BaseModel):

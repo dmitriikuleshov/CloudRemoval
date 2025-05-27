@@ -5,6 +5,7 @@ from app.auth.routers import router as auth_router
 from app.user.routers import router as user_router
 from app.storage.routers import router as storage_router
 from app.sentinel_hub.router import router as sentinel_router
+from app.ml.routers import cloud_router, upscale_router
 
 from common.connectors.s3 import test_s3
 from common.connectors.db import engine, Base, test_db
@@ -31,6 +32,8 @@ app.include_router(auth_router)
 app.include_router(user_router)
 app.include_router(storage_router)
 app.include_router(sentinel_router)
+app.include_router(cloud_router)
+app.include_router(upscale_router)
 
 # Initialize the database
 Base.metadata.create_all(bind=engine)

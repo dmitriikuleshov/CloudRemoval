@@ -54,7 +54,7 @@ function setup() {
 }
 
 function evaluatePixel(sample) {
-    var value = Math.log(sample.VV) * 10.0 + 100;
+    var value = (Math.log(sample.VV) * 10.0 + 100) * 2;
     return [Math.min(Math.max(value, 0), 255)];
 }
 """
@@ -68,7 +68,13 @@ class SentinelHubService:
         self.s3_client = get_s3_client()
 
     def search_and_save_images(self, search_date, coords) -> Dict[str, str]:
-        bbox = BBox(bbox=coords, crs=CRS.WGS84)
+        size_degrees = (256 * 10) / 111320
+        bbox = BBox([
+            coords.lon - size_degrees / 2,
+            coords.lat - size_degrees / 2,
+            coords.lon + size_degrees / 2,
+            coords.lat + size_degrees / 2
+        ], crs=CRS.WGS84)
 
         requests = {
             "rgb": SentinelHubRequest(
@@ -79,7 +85,7 @@ class SentinelHubService:
                 )],
                 responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
                 bbox=bbox,
-                size=bbox_to_dimensions(bbox, resolution=20),
+                size=(256, 256),
                 config=self.config
             ),
             "sar": SentinelHubRequest(
@@ -90,7 +96,7 @@ class SentinelHubService:
                 )],
                 responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
                 bbox=bbox,
-                size=bbox_to_dimensions(bbox, resolution=20),
+                size=(256, 256),
                 config=self.config
             )
         }

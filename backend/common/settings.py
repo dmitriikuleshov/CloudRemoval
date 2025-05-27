@@ -6,10 +6,17 @@ def env(parameter, default_value = None) -> Any:
     return environ.get(f"CLOUD_REMOVAL_{parameter}", default_value)
 
 
+class Microservices:
+    ml_service = env("ML_URL", "ml-service")
+
+
 class Credentials:
     class Sentinel:
         client_id = env("SENTINEL_CLIENT_ID")
         client_secret = env("SENTINEL_CLIENT_SECRET")
+
+    class Telegram:
+        api_key = env("TELEGRAM_API_KEY")
 
 
 class Database:

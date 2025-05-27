@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from sqlalchemy.orm import Session, relationship
 from sqlalchemy import (
     select, Column, Integer, String, ForeignKey,
-    Boolean, Enum, DateTime, Float
+    Boolean, Enum, DateTime, Float, BigInteger
 )
 
 from common.models.user import User
@@ -106,3 +106,13 @@ class Entry(Base):
             .offset(offset)
         )
         return db.execute(query).scalars()
+
+
+class TelegramUserMapping(Base):
+    __tablename__ = "telegram_user_mapping"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    telegram_user_id = Column(BigInteger, unique=True, index=True, nullable=False)
+    internal_user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
+
+    user = relationship("User")

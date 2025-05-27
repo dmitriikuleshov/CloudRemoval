@@ -15,9 +15,8 @@ export function LinksSection() {
                     </div>
                     <h3>Научные публикации</h3>
                     <ul className="link-list">
-                        <li><a href="#" target="_blank">Методы обработки спутниковых снимков для удаления облаков</a></li>
-                        <li><a href="#" target="_blank">Алгоритмы глубокого обучения для реконструкции ландшафта</a></li>
-                        <li><a href="#" target="_blank">Применение GAN для устранения помех на изображениях</a></li>
+                        <li><a href="https://docs.google.com/document/d/1gOrWXmgv7_xOKSGK6GEhPtav9BgkEqZ0fScpO5z8aGA/edit?tab=t.0" target="_blank">Итоговая аттестационная работа</a></li>
+                        <li><a href="https://docs.google.com/presentation/d/1lG1WkXidWyky6XDl96Onces3kcYoTiek/edit?usp=drive_link&ouid=101942853060006694245&rtpof=true&sd=true" target="_blank">Презентация проекта</a></li>
                     </ul>
                 </div>
                 
@@ -30,28 +29,12 @@ export function LinksSection() {
                     </div>
                     <h3>API и технологии</h3>
                     <ul className="link-list">
-                        <li><a href="#" target="_blank">Документация REST API</a></li>
-                        <li><a href="#" target="_blank">GitHub репозиторий проекта</a></li>
-                        <li><a href="#" target="_blank">Набор данных для тренировки моделей</a></li>
+                        <li><a href="https://docs.cs-cart.ru/latest/developer_guide/api/" target="_blank">Документация REST API</a></li>
+                        <li><a href="https://github.com/dmitriikuleshov/CloudRemoval" target="_blank">GitHub репозиторий проекта</a></li>
+                        <li><a href="https://drive.google.com/drive/folders/1tr8rX2ubMyn_mTu2BJqYgvKbQ_mIxjEW?usp=drive_link" target="_blank">Набор данных для тренировки моделей</a></li>
                     </ul>
                 </div>
-                
-                {/* <!-- Обучающие материалы --> */}
-                <div className="link-card learning">
-                    <div className="link-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z"/>
-                            <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z"/>
-                        </svg>
-                    </div>
-                    <h3>Обучающие материалы</h3>
-                    <ul className="link-list">
-                        <li><a href="#" target="_blank">Введение в обработку спутниковых снимков</a></li>
-                        <li><a href="#" target="_blank">Видео-курс по работе с нашим API</a></li>
-                        <li><a href="#" target="_blank">Сферы применения</a></li>
-                    </ul>
-                </div>
-                
+
                 {/* <!-- Телеграм бот --> */}
                 <div className="link-card partners">
                     <div className="link-icon">
@@ -62,9 +45,7 @@ export function LinksSection() {
                     </div>
                     <h3>Телеграм бот</h3>
                     <ul className="link-list">
-                        <li><a href="#" target="_blank">Начать работу с ботом</a></li>
-                        <li><a href="#" target="_blank">Инструкция по использованию</a></li>
-                        <li><a href="#" target="_blank">Премиум функции</a></li>
+                        <li><a href="https://t.me/cloud_removal_bot" target="_blank">Начать работу с ботом</a></li>
                     </ul>
                 </div>
             </div>

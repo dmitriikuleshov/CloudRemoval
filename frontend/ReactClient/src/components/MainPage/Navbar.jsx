@@ -23,7 +23,7 @@ export function Navbar() {
 
                 <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
-                        <Link className="nav-link active" to="/">Главная</Link>
+                        <a className="nav-link active" href="#header">Главная</a>
                     </li>
                     
 
@@ -43,7 +43,7 @@ export function Navbar() {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#contact">Контакты</a>
+                            <a className="nav-link" href="#contact">Полезные ресурсы</a>
                         </li>
 
                     {user ? (

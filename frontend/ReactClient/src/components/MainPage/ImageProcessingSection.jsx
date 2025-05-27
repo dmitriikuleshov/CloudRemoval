@@ -49,7 +49,7 @@ export function ImageProcessingSection({ scrollHandler }) {
   };
 
   const getUploadUrl = async () => {
-    const response = await fetch('http://localhost:8080/storage', {
+    const response = await fetch('http://37.252.19.60:8000/storage', {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -75,7 +75,7 @@ export function ImageProcessingSection({ scrollHandler }) {
   };
 
   const triggerCloudRemove = async (entryId) => {
-    const response = await fetch(`http://localhost:8100/cloud-remove?entry_id=${entryId}`, {
+    const response = await fetch(`http://37.252.19.60:8000/cloud-remove/?entry=${entryId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -88,7 +88,7 @@ export function ImageProcessingSection({ scrollHandler }) {
   };
 
   const fetchEntryInfo = async (entryId) => {
-    const response = await fetch(`http://localhost:8080/storage/${entryId}`, {
+    const response = await fetch(`http://37.252.19.60:8000/storage/${entryId}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
       }
@@ -123,7 +123,7 @@ export function ImageProcessingSection({ scrollHandler }) {
     setShowActions(false);
   
     try {
-      const uploadResponse = await fetch('http://localhost:8080/storage', {
+      const uploadResponse = await fetch('http://37.252.19.60:8000/storage', {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -144,7 +144,7 @@ export function ImageProcessingSection({ scrollHandler }) {
       });
   
       const processResponse = await fetch(
-        `http://localhost:8100/cloud-remove?entry_id=${entryId}`,
+        `http://37.252.19.60:8000/cloud-remove?entry=${entryId}`,
         {
           method: 'GET',
           headers: {
@@ -156,7 +156,7 @@ export function ImageProcessingSection({ scrollHandler }) {
       if (!processResponse.ok) throw new Error('Ошибка запуска обработки');
   
       const entryInfo = await fetch(
-        `http://localhost:8080/storage/${entryId}`,
+        `http://37.252.19.60:8000/storage/${entryId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,

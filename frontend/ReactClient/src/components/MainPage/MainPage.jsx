@@ -5,6 +5,7 @@ import { Navbar } from './Navbar'
 import { Header } from './Header'
 import { AboutSection } from './AboutSection'
 import { ImageProcessingSection } from './ImageProcessingSection'
+import { SarSection } from './SarSection'
 import { LinksSection } from './LinksSection'
 import { Footer } from './Footer'
 import { useAuth } from '../context/AuthContext';
@@ -41,6 +42,7 @@ export function MainPage() {
             <Header scrollHandler={() => scrollToSection(0)} />
             <AboutSection scrollHandler={() => scrollToSection(1)} />
             <ImageProcessingSection scrollHandler={() => scrollToSection(2)} />
+            <SarSection scrollHandler={() => scrollToSection(3)} />
             <LinksSection />
             <Footer />
         </div>

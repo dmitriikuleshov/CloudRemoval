@@ -36,7 +36,7 @@ export function AuthPage() {
         params.append('client_id', 'string');
         params.append('client_secret', 'string');
 
-        const response = await fetch('http://127.0.0.1:8080/auth/login', {
+        const response = await fetch('http://37.252.19.60:8000/auth/login', {
           method: 'POST',
           headers: {
             'accept': 'application/json',
@@ -62,7 +62,7 @@ export function AuthPage() {
           surname: formData.surname
         };
 
-        const response = await fetch('http://127.0.0.1:8080/auth/register', {
+        const response = await fetch('http://37.252.19.60:8000/auth/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

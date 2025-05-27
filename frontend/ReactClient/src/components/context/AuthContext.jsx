@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        const response = await fetch('http://localhost:8080/user/info', {
+        const response = await fetch('http://37.252.19.60:8000/user/info', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json'
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     try {
       localStorage.setItem('access_token', token);
       
-      const response = await fetch('http://localhost:8080/user/info', {
+      const response = await fetch('http://37.252.19.60:8000/user/info', {
         headers: {
           'Authorization': `Bearer ${token}`,
         }

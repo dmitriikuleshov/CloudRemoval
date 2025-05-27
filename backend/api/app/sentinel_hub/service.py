@@ -70,10 +70,10 @@ class SentinelHubService:
     def search_and_save_images(self, search_date, coords) -> Dict[str, str]:
         size_degrees = (256 * 10) / 111320
         bbox = BBox([
-            coords.lon - size_degrees / 2,
-            coords.lat - size_degrees / 2,
-            coords.lon + size_degrees / 2,
-            coords.lat + size_degrees / 2
+            coords[0] - size_degrees / 2,
+            coords[1] - size_degrees / 2,
+            coords[0] + size_degrees / 2,
+            coords[1] + size_degrees / 2
         ], crs=CRS.WGS84)
 
         requests = {

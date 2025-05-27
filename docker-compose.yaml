@@ -70,13 +70,6 @@ services:
       - CLOUD_REMOVAL_JWT_SECRET
       - CLOUD_REMOVAL_JWT_ALGORITHM
       - CLOUD_REMOVAL_ENABLE_UPSCALING
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
 
   client:
     build:
@@ -91,13 +84,23 @@ services:
       - ./frontend/ReactClient:/app
       - /app/node_modules
 
-  # telegram-bot:
-  #   build:
-  #     context: ./bot
-  #   ports:
-  #     - 127.0.0.1:9000:9000
-  #   networks:
-  #     - cloud-removal
+  bot:
+    build:
+      context: ./backend
+      dockerfile: bot/Dockerfile
+    ports:
+      - 127.0.0.1:9500:9000
+    environment:
+      - CLOUD_REMOVAL_DATABASE_URL
+      - CLOUD_REMOVAL_S3_PUBLIC_URL
+      - CLOUD_REMOVAL_S3_URL
+      - CLOUD_REMOVAL_S3_REGION
+      - CLOUD_REMOVAL_S3_ACCESS_KEY
+      - CLOUD_REMOVAL_S3_SECRET_KEY
+      - CLOUD_REMOVAL_S3_BUCKET
+      - CLOUD_REMOVAL_TELEGRAM_API_KEY
+    networks:
+      - cloud-removal
 
 volumes:
   database:

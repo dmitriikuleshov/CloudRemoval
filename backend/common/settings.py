@@ -7,7 +7,7 @@ def env(parameter, default_value = None) -> Any:
 
 
 class Microservices:
-    ml_service = env("ML_URL", "ml-service")
+    ml_service = env("ML_URL", "ml:8100")
 
 
 class Credentials:

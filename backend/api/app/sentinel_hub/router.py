@@ -1,4 +1,5 @@
 import asyncio
+from datetime import datetime
 from typing import Tuple
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -19,8 +20,8 @@ router = APIRouter(prefix="/sentinel", tags=["sentinel"])
 def background_task(
     user: User,
     db: Session,
-    timeframe: Tuple[int, int],
-    coordinates: Tuple[float, float, float, float]
+    timeframe: Tuple[datetime, datetime],
+    coordinates: Tuple[float, float]
 ):
     service = SentinelHubService()
     keys = service.search_and_save_images(timeframe, coordinates)
@@ -29,8 +30,13 @@ def background_task(
         raise HTTPException(404, "Unable to find the photos on SentinelHub")
 
     entry = Entry.create(db, user, SourceType.sentinel_hub)
+
     entry.file.source_key = keys.get("rgb")
     entry.file.sar_key = keys.get("sar")
+    entry.longitude = coordinates[0]
+    entry.latitude = coordinates[1]
+    entry.month = timeframe[0].month
+
     db.commit()
 
     return SentinelResponse(entry_id=entry.uuid)

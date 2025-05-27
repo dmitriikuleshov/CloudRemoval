@@ -12,8 +12,8 @@ class Microservices:
 
 class Credentials:
     class Sentinel:
-        client_id = env("SENTINEL_CLIENT_ID")
-        client_secret = env("SENTINEL_CLIENT_SECRET")
+        client_id = environ.get("SENTINEL_CLIENT_ID")
+        client_secret = environ.get("SENTINEL_CLIENT_SECRET")
 
     class Telegram:
         api_key = env("TELEGRAM_API_KEY")

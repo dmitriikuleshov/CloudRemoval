@@ -1,0 +1,1 @@
+export const backend_url = "http://37.252.19.60:8000";

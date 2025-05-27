@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { backend_url } from '../../backend_url';
 
 export function ImageProcessingSection({ scrollHandler }) {
   const containerStyle = {
@@ -49,7 +50,7 @@ export function ImageProcessingSection({ scrollHandler }) {
   };
 
   const getUploadUrl = async () => {
-    const response = await fetch('http://37.252.19.60:8000/storage', {
+    const response = await fetch(backend_url + '/storage', {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -75,7 +76,7 @@ export function ImageProcessingSection({ scrollHandler }) {
   };
 
   const triggerCloudRemove = async (entryId) => {
-    const response = await fetch(`http://37.252.19.60:8000/cloud-remove/?entry=${entryId}`, {
+    const response = await fetch(backend_url + `/cloud-remove/?entry=${entryId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -88,7 +89,7 @@ export function ImageProcessingSection({ scrollHandler }) {
   };
 
   const fetchEntryInfo = async (entryId) => {
-    const response = await fetch(`http://37.252.19.60:8000/storage/${entryId}`, {
+    const response = await fetch(backend_url + `/storage/${entryId}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
       }
@@ -123,7 +124,7 @@ export function ImageProcessingSection({ scrollHandler }) {
     setShowActions(false);
   
     try {
-      const uploadResponse = await fetch('http://37.252.19.60:8000/storage', {
+      const uploadResponse = await fetch(backend_url + '/storage', {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -144,7 +145,7 @@ export function ImageProcessingSection({ scrollHandler }) {
       });
   
       const processResponse = await fetch(
-        `http://37.252.19.60:8000/cloud-remove?entry=${entryId}`,
+        backend_url + `/cloud-remove?entry=${entryId}`,
         {
           method: 'GET',
           headers: {
@@ -156,7 +157,7 @@ export function ImageProcessingSection({ scrollHandler }) {
       if (!processResponse.ok) throw new Error('Ошибка запуска обработки');
   
       const entryInfo = await fetch(
-        `http://37.252.19.60:8000/storage/${entryId}`,
+        backend_url + `/storage/${entryId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,

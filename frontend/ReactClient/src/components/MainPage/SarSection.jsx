@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { backend_url } from '../../backend_url';
 
 export function SarSection({ scrollHandler }) {
     const [startDate, setStartDate] = useState('');
@@ -27,7 +28,7 @@ export function SarSection({ scrollHandler }) {
     };
 
     const fetchEntryStatus = async (entryId) => {
-        const response = await fetch(`http://37.252.19.60:8000/storage/${entryId}`, {
+        const response = await fetch(backend_url + `/storage/${entryId}`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             }
@@ -41,7 +42,7 @@ export function SarSection({ scrollHandler }) {
         const maxAttempts = 20;
         const delay = 3000;
 
-        await fetch(`http://37.252.19.60:8000/cloud-remove/v2?entry=${entryId}`, {
+        await fetch(backend_url + `/cloud-remove/v2?entry=${entryId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
@@ -79,7 +80,7 @@ export function SarSection({ scrollHandler }) {
                 coordinates: coords
             };
 
-            const sentinelResponse = await fetch('http://37.252.19.60:8000/sentinel', {
+            const sentinelResponse = await fetch(backend_url + '/sentinel', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',

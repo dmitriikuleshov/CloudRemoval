@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { backend_url } from '../../backend_url';
 
 const AuthContext = createContext();
 
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        const response = await fetch('http://37.252.19.60:8000/user/info', {
+        const response = await fetch(backend_url + '/user/info', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json'
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     try {
       localStorage.setItem('access_token', token);
       
-      const response = await fetch('http://37.252.19.60:8000/user/info', {
+      const response = await fetch(backend_url + '/user/info', {
         headers: {
           'Authorization': `Bearer ${token}`,
         }

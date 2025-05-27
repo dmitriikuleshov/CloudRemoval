@@ -31,20 +31,20 @@ model.setup(opt)               # regular setup: load and print networks; create 
 model.eval()
 
 
-def remove_clouds_from_image(image: bytes):
+def cycleGAN_remove(image: bytes):
     dataset = create_dataset(opt)
     dataset.dataset.append(image)
 
     for data in dataset:
         model.set_input(data)
         model.test()
-        
+
         visuals = model.get_current_visuals()
         photo_data = extract_photo(visuals, opt.aspect_ratio)
         pil = photo_data['fake']
-        
+
         output = BytesIO()
         pil.save(output, format="PNG")
         output.seek(0)
-        
+
         return output

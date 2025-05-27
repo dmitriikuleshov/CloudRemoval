@@ -14,7 +14,10 @@ from common.models.storage import Entry
 from common.deps.user import validate_user
 from common.connectors.s3 import get_s3, test_s3
 from common.connectors.db import get_db, test_db
+
+from app.metadata import RequestMetadata
 from app.networks.cycleGAN.functions import remove_clouds_from_image
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -25,7 +28,7 @@ app = FastAPI()
 
 
 @app.get("/cloud-remove")
-async def image_cloud_removal(
+async def cycleGAN_removal(
     entry_id: UUID,
     user_id: int = Depends(validate_user),
     db: Session = Depends(get_db),
@@ -35,12 +38,37 @@ async def image_cloud_removal(
     if not entry or entry.user_id != user_id:
         return 404, "Entry not found"
 
-    source_key = entry.file.upscaled_key or entry.file.source_key
-    target_key = entry.file.result_key or str(uuid4())
+    request = RequestMetadata(
+        entry=entry,
+        source_keys = (entry.file.upscaled_key or entry.file.source_key, ),
+        result_key = entry.file.result_key or str(uuid4()),
+    )
 
     status, message = await asyncio.shield(run_in_threadpool(
-        run_process,
-        remove_clouds_from_image, source_key, target_key, entry, db, s3
+        run_process, remove_clouds_from_image, request, db, s3
+    ))
+
+    raise HTTPException(status, message)
+
+
+@app.get("/cloud-remove/v2")
+async def sarDefect_removal(
+    entry_id: UUID,
+    user_id: int = Depends(validate_user),
+    db: Session = Depends(get_db),
+    s3: boto3.client = Depends(get_s3)
+):
+    entry = Entry.from_uuid(db, entry_id)
+    if not entry or entry.user_id != user_id:
+        return 404, "Entry not found"
+
+    keys = (
+        entry.file.upscaled_key or entry.file.source_key,
+        entry.file.result_key or str(uuid4())
+    )
+
+    status, message = await asyncio.shield(run_in_threadpool(
+        run_process, remove_clouds_from_image, entry, keys, db, s3
     ))
 
     raise HTTPException(status, message)
@@ -60,16 +88,14 @@ if settings.ML.enable_upscaling:
         if not entry or entry.user_id != user_id:
             return 404, "Entry not found"
 
-        source_key = entry.file.source_key
-        target_key = entry.file.upscaled_key or str(uuid4())
+        request = RequestMetadata(
+            entry=entry,
+            source_keys = (entry.file.source_key, ),
+            result_key = entry.file.upscaled_key or str(uuid4())
+        )
 
         status, message = await asyncio.shield(run_in_threadpool(
-            run_process,
-            upscale_image, source_key, target_key, entry, db, s3
+            run_process, upscale_image, request, db, s3
         ))
-
-        if status == 200:
-            entry.file.upscaled_key = target_key
-            db.commit()
 
         raise HTTPException(status, message)

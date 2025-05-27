@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Tuple
 
 from io import BytesIO
 from uuid import UUID, uuid4
@@ -8,6 +8,8 @@ from sqlalchemy.orm import Session
 
 from common import settings
 from common.models.storage import Entry, ResponseType
+
+from app.metadata import RequestMetadata
 
 
 def get_from_s3(s3: boto3.client, key):
@@ -23,28 +25,27 @@ def save_to_s3(s3: boto3.client, image: BytesIO, key: str):
 
 
 def run_process(
-    process: Callable, source_key: str, target_key: str,
-    entry: Entry, db: Session, s3: boto3.client
+    process: Callable, req: RequestMetadata, db: Session, s3: boto3.client
 ):
-    entry.status.in_progress = True
+    req.entry.status.in_progress = True
     db.commit()
 
     try:
-        source_img = get_from_s3(s3, source_key)
-        target_img = process(source_img)
-        save_to_s3(s3, target_img, target_key)
+        images = (get_from_s3(s3, key) for key in req.source_keys)
+        target_img = process(*images, **req.kwargs)
+        save_to_s3(s3, target_img, req.result_key)
 
     except Exception as e:
         print(f"Error occured during inference: {e}")
-        entry.status.response = ResponseType.failure
+        req. entry.status.response = ResponseType.failure
         status, message = 500, "Unable to perform the inference"
 
     else:
-        entry.file.result_key = target_key
-        entry.status.response = ResponseType.success
+        req.entry.file.result_key = req.result_key
+        req.entry.status.response = ResponseType.success
         status, message = 200, "Processing completed successfully"
 
-    entry.status.in_progress = False
+    req.entry.status.in_progress = False
     db.commit()
 
     return status, message
